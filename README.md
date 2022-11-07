@@ -14,7 +14,7 @@ For example, suppose we are testing different classifiers on some
 datasets, using all possible combinations of various parameters.  The
 following script does this:
 
-```
+```bash
 #!/bin/bash
 
 param_file=params-myexperiment.txt
@@ -35,10 +35,13 @@ command='python do_classification.py --dataset={dataset} --classifier={classifie
 ./slurm_sbatch.py --paramfile=$param_file --setup="$setup" --command="$command"
 ```
 
-This calcuates the number of parameter combinations, creates a script
+This specifies the parameters value lists, calcuates the number of
+parameter combinations, creates a script
 for `sbatch` to run, and calls `sbatch` on it.  It reads the slurm
 configuration parameters (which are supplied as `#SBATCH` directives
 within the script) from a configuration file or from the command line.
+(Of course, the parameter file could be written separately and not
+included in this bash script.)
 
 The present incarnation of these scripts requires the three Python
 scripts and one configuration file to be copied into a suitable
@@ -78,7 +81,6 @@ The generated sbatch script has the form:
 
 #SBATCH [sbatch option]
 #SBATCH [sbatch option]
-...
 
 [setup commands]
 
@@ -91,7 +93,7 @@ option is specified.)
 The sbatch options are specified in the file `sbatch-config.toml`,
 which should contain lines such as:
 
-```
+```toml
 p = "mynode"
 A = "MY-ACCOUNT"
 N = 1
@@ -118,7 +120,7 @@ quoted so that the shell interprets it as the single argument of
 values based on the parameters file (another TOML file specified by
 `--paramfile`).  In this case, the parameter file might read:
 
-```
+```toml
 network = ["VGG-16", "ResNet-18", "ResNet-50"]
 iterations = [100, 200, 300, 400, 500]
 ```
