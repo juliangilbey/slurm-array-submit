@@ -1,0 +1,8 @@
+dataset = ["SYNTHETIC"]
+imputation = ["MICE", "GAIN", "Mean"]
+train_percentage = [0.25, 0.5]
+test_percentage = [0.5]
+n_holdout_sets = 3
+n_val_sets = 5
+n_repeats = 10
+

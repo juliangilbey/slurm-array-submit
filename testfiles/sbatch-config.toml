@@ -1,0 +1,5 @@
+p = "mynode"
+A = "MY-ACCOUNT"
+N = 2
+time = "15:00:00"
+o = "messages_%a.out"
