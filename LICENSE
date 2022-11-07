@@ -1,6 +1,15 @@
 MIT License
 
 Copyright (c) 2022 Julian Gilbey
+nth_product() in slurm_utils.py: Copyright (c) 2017 Erik Rose
+slurm_toml_decoder.py:
+   (c) 2013-2019 William Pearson
+   (c) 2015-2016 Julien Enselme
+   (c) 2016 Google Inc.
+   (c) 2017 Samuel Vasko
+   (c) 2017 Nate Prewitt
+   (c) 2017 Jack Evans
+   (c) 2019 Filippo Broggini
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
