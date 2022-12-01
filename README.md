@@ -6,7 +6,7 @@ experiment with each set of parameters as a separate task, rather than
 have one very large task for the entire set of experiments.  This
 small collection of scripts grew out of this realisation.  It is
 designed for use with the [Slurm](https://slurm.schedmd.com/) workload
-manager.
+manager.  Do see the warning below before using these scripts, though.
 
 It allows one to easily submit an array of tasks by writing a single
 template script and letting these scripts do the rest of the work.
@@ -136,3 +136,19 @@ overridden using the `slurm_sbatch.py` `--array` option, for example
 `--array=0-{count}%4`, where `{count}` is replaced by the maximum task
 ID (which is one less than the number of parameter combinations, 14 in
 this case).
+
+
+## Warning: Slurm accounting
+
+Apparently (and I have not had the chance to confirm this from the
+source code), Slurm charges for jobs according to the simple rule: CPU
+hours charged = number of CPUs requested x time limit requested.
+(There is presumably a more complicated calculation if other
+parameters, such as the memory per CPU, are also changed.)  If an
+array job requests 10 hours on 2 CPUs per job, with 100 jobs in the
+array, it will be charged 2000 CPU hours.  And if there's an error in
+the job script, and they all crash after, say, 30 seconds, taking a
+total of less than an hour between them, it will still be charged for
+2000 hours.  Similarly, breaking a large experiment into 1000 small
+jobs but overestimating the time required per job will be fairly
+costly.  Finding an appropriate balance is important!
