@@ -7,12 +7,12 @@ the nth product.
 """
 
 import argparse
+import os
+import tempfile
+import warnings
+from collections import OrderedDict
 from functools import reduce
 from operator import mul
-from collections import OrderedDict
-import os
-import warnings
-import tempfile
 
 import slurm_toml_decoder as toml
 
@@ -61,6 +61,9 @@ def validate_param_dict(dict_lists):
 def count_product(lists):
     """The product of the lengths of the iterables in the list of lists."""
     lengths = list(map(len, lists))
+
+    if len(lengths) == 0:
+        return 1
 
     return reduce(mul, lengths)
 
