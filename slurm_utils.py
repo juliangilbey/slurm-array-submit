@@ -86,6 +86,9 @@ def nth_product(index, lists):
     pools = list(map(tuple, reversed(lists)))
     lengths = list(map(len, pools))
 
+    if len(lengths) == 0:
+        return tuple()
+
     total = reduce(mul, lengths)
 
     if index < 0:
